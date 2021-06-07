@@ -1,1 +1,4 @@
-Hi, this is my first test file of editor.
+Hi, this is my first test file of Zorro editor.
+
+Heyyy! implemented open tool as well
+

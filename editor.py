@@ -1,21 +1,38 @@
 import tkinter as tk
+from tkinter.constants import END
 
 from tkinter.filedialog import *
 
+
 def saveFile():
     fileLocation = asksaveasfilename(
-        defaultextension = "txt",
-        filetypes=[("Text Files","*.txt"),("All Files","*.*")]
+        defaultextension="txt",
+        filetypes=[("Text Files", "*.txt"), ("All Files", "*.*")]
     )
 
     if not fileLocation:
         return
     # else:
     #     print(fileLocation)
-    with open(fileLocation,"w") as ofile:  # File handling with open() => Opens file
-        notes = text_editor.get(1.0,tk.END)
+    with open(fileLocation, "w") as ofile:  # File handling with open() => Opens file
+        notes = text_editor.get(1.0, tk.END)
         ofile.write(notes)
     window.title(fileLocation + " - Zorro Editor")
+
+
+def openFile():
+    fileLocation = askopenfilename(
+        filetypes=[("Text Files", "*.txt"), ("All Files", "*.*")]
+    )
+
+    if not fileLocation:
+        return
+    text_editor.delete(1.0, tk.END)
+    with open(fileLocation, "r") as ifile:
+        notes = ifile.read()
+        text_editor.insert(tk.END, notes)
+    window.title(fileLocation + " - Zorro Editor")
+
 
 window = tk.Tk()  # Initializes Tkinter window
 
@@ -30,10 +47,10 @@ text_editor.grid(row=0, column=1, sticky="nsew")
 tools = tk.Frame(window, relief=tk.RAISED, bd=2)
 tools.grid(row=0, column=0, sticky="ns")
 
-open_button = tk.Button(tools, text="Open File")
+open_button = tk.Button(tools, text="Open File",command=openFile)
 open_button.grid(row=0, column=0, padx=3, pady=3)
 
-save_button = tk.Button(tools, text="Save As",command=saveFile)
+save_button = tk.Button(tools, text="Save As", command=saveFile)
 save_button.grid(row=0, column=1, padx=3, pady=3)
 
 window.mainloop()
