@@ -66,6 +66,6 @@ saveas_button = tk.Button(tools, text="Save As", command=saveAsFile)
 saveas_button.grid(row=0, column=1, padx=3, pady=3)
 
 save_button = tk.Button(tools, text="Save", command=saveFile)
-save_button.grid(row=1, column=0, padx=3, pady=3)
+save_button.grid(row=1, column=0)
 
 window.mainloop()
