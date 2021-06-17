@@ -3,3 +3,5 @@ Hi, this is my first test file of Zorro editor.
 Heyyy! implemented open tool as well
 
 testing only save option.
+
+Checking Shortcut key to save file

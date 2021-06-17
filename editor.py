@@ -3,7 +3,6 @@ from tkinter.constants import END
 
 from tkinter.filedialog import *
 
-
 def saveAsFile():
     global fileLocation
     fileLocation = asksaveasfilename(
@@ -22,13 +21,13 @@ def saveAsFile():
 
 
 def saveFile():
-    # print(fileLocation)
     if not fileLocation:
         return
     with open(fileLocation, "w") as ofile:  # File handling with open() => Opens file
         notes = text_editor.get(1.0, tk.END)
         ofile.write(notes)
     window.title(fileLocation + " - Zorro Editor")
+    print("Saved")
 
 
 def openFile():
@@ -67,5 +66,7 @@ saveas_button.grid(row=0, column=1, padx=3, pady=3)
 
 save_button = tk.Button(tools, text="Save", command=saveFile)
 save_button.grid(row=1, column=0)
+
+window.bind("<Control-s>",lambda x:saveFile())
 
 window.mainloop()
