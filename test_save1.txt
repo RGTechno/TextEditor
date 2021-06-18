@@ -5,3 +5,4 @@ Heyyy! implemented open tool as well
 testing only save option.
 
 Checking Shortcut key to save file
+Opened file with shortcut

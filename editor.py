@@ -3,47 +3,44 @@ from tkinter.constants import END
 
 from tkinter.filedialog import *
 
+def openFile():
+    global file
+    file = askopenfilename(
+        filetypes=[("Text Files", "*.txt"), ("All Files", "*.*")]
+    )
+
+    if not file:
+        return
+    text_editor.delete(1.0, tk.END)
+    with open(file, "r") as ifile:
+        notes = ifile.read()
+        text_editor.insert(tk.END, notes)
+    window.title(file + " - Zorro Editor")
+
 def saveAsFile():
-    global fileLocation
-    fileLocation = asksaveasfilename(
+    global file
+    file = asksaveasfilename(
         defaultextension="txt",
         filetypes=[("Text Files", "*.txt"), ("All Files", "*.*")]
     )
 
-    if not fileLocation:
+    if not file:
         return
     # else:
-    #     print(fileLocation)
-    with open(fileLocation, "w") as ofile:  # File handling with open() => Opens file
+    #     print(file)
+    with open(file, "w") as ofile:  # File handling with open() => Opens file
         notes = text_editor.get(1.0, tk.END)
         ofile.write(notes)
-    window.title(fileLocation + " - Zorro Editor")
-
+    window.title(file + " - Zorro Editor")
 
 def saveFile():
-    if not fileLocation:
+    if not file:
         return
-    with open(fileLocation, "w") as ofile:  # File handling with open() => Opens file
+    with open(file, "w") as ofile:  # File handling with open() => Opens file
         notes = text_editor.get(1.0, tk.END)
         ofile.write(notes)
-    window.title(fileLocation + " - Zorro Editor")
+    window.title(file + " - Zorro Editor")
     print("Saved")
-
-
-def openFile():
-    global fileLocation
-    fileLocation = askopenfilename(
-        filetypes=[("Text Files", "*.txt"), ("All Files", "*.*")]
-    )
-
-    if not fileLocation:
-        return
-    text_editor.delete(1.0, tk.END)
-    with open(fileLocation, "r") as ifile:
-        notes = ifile.read()
-        text_editor.insert(tk.END, notes)
-    window.title(fileLocation + " - Zorro Editor")
-
 
 window = tk.Tk()  # Initializes Tkinter window
 
@@ -67,6 +64,7 @@ saveas_button.grid(row=0, column=1, padx=3, pady=3)
 save_button = tk.Button(tools, text="Save", command=saveFile)
 save_button.grid(row=1, column=0)
 
+window.bind("<Control-o>",lambda x:openFile())
 window.bind("<Control-s>",lambda x:saveFile())
 
 window.mainloop()
