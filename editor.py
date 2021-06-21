@@ -4,6 +4,7 @@ from tkinter.constants import END
 from tkinter.filedialog import *
 
 def openFile():
+    print("opening")
     global file
     file = askopenfilename(
         filetypes=[("Text Files", "*.txt"), ("All Files", "*.*")]
